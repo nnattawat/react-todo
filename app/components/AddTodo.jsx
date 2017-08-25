@@ -1,6 +1,6 @@
-let React = require('react');
-let {connect} = require('react-redux');
-let actions = require('actions');
+import React from 'react';
+import {connect} from 'react-redux';
+import actions from 'actions';
 
 export let AddTodo = React.createClass({
   handleSubmit: function (e) {

@@ -1,8 +1,7 @@
-let React = require('react');
-let moment = require('moment');
-let {connect} = require('react-redux');
-let actions = require('actions');
-
+import React  from 'react';
+import moment  from 'moment';
+import {connect} from 'react-redux';
+import actions  from 'actions';
 
 export let Todo = React.createClass({
   render: function () {
