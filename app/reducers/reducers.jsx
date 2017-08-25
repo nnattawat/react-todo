@@ -37,15 +37,15 @@ export let todosReducer = (state = [], action) => {
       break;
     case 'TOGGLE_TODO':
       return state.map((todo) => {
-        let newCompleted;
+        let completed = todo.completed;
         if (todo.id == action.id) {
-          newCompleted = !todo.completed;
+          completed = !todo.completed;
         }
 
         return {
           ...todo,
-          completed: newCompleted,
-          completedAt: newCompleted ? moment().unix() : undefined
+          completed: completed,
+          completedAt: completed ? moment().unix() : undefined
         };
       });
       break;
