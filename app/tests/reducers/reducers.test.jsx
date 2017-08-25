@@ -22,7 +22,7 @@ describe('Reducers', () => {
         type: 'TOGGLE_SHOW_COMPLETED'
       }
 
-      // df(a), if a get changed test will false
+      // df(a), if a get changed test will fail
       let res = reducers.showCompletedReducer(df(true), df(action));
       expect(res).toEqual(false);
     });

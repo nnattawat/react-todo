@@ -1,11 +1,14 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var TestUtils = require('react-addons-test-utils');
-var expect = require('expect');
-var $ = require('jquery');
+let React = require('react');
+let ReactDOM = require('react-dom');
+let TestUtils = require('react-addons-test-utils');
+let expect = require('expect');
+let $ = require('jquery');
+let {Provider} = require('react-redux');
 
-var TodoList = require('TodoList');
-var Todo = require('Todo');
+import {configure} from 'configureStore';
+import ConnectedTodoList, {TodoList} from 'TodoList';
+import ConnectedTodo, {Todo} from 'Todo';
+
 
 describe('TodoList', () => {
   it('should exist', () => {
@@ -13,23 +16,35 @@ describe('TodoList', () => {
   });
 
   it('should render one Todo component for each todo item', () => {
-    var todos = [{
+    let todos = [{
       id: 1,
-      text: 'Do something'
+      text: 'Do something',
+      completed: false,
+      completedAt: undefined,
+      createdAt: 500
     }, {
       id: 2,
-      text: 'Check mail'
+      text: 'Check mail',
+      completed: false,
+      completedAt: undefined,
+      createdAt: 500
     }];
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
-    var todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
 
+    let store = configure({ todos });
+    let provider = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <ConnectedTodoList/>
+      </Provider>
+    );
+    let todoList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedTodoList)[0];
+    let todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, ConnectedTodo);
     expect(todosComponents.length).toBe(todos.length);
   });
 
   it('should render empty message if no todos', () => {
-    var todos = [];
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
-    var $el = $(ReactDOM.findDOMNode(todoList));
+    let todos = [];
+    let todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+    let $el = $(ReactDOM.findDOMNode(todoList));
 
     expect($el.find('.container__message').length).toBe(1);
   });
