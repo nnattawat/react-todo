@@ -1,9 +1,13 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var {Route, Router, IndexRoute, hashHistory} = require('react-router');
+let React = require('react');
+let ReactDOM = require('react-dom');
+let {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
-var TodoApp = require('TodoApp');
+let TodoApp = require('TodoApp');
 
+let actions = require('actions');
+let store = require('configureStore');
+
+store.dispatch(actions.toggleShowCompleted());
 // Load foundation
 $(document).foundation();
 
