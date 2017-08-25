@@ -1,5 +1,5 @@
-import React from 'react';
-import actions from 'actions';
+let React = require('react');
+let actions = require('actions');
 import {connect} from 'react-redux';
 
 export let TodoSearch = React.createClass({
