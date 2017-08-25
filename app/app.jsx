@@ -9,6 +9,7 @@ let TodoApp = require('TodoApp');
 var actions = require('actions');
 
 store.dispatch(actions.addTodo('Walk a dog'));
+store.dispatch(actions.addTodo('Walk a cat'));
 // Load foundation
 $(document).foundation();
 
