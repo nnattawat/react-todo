@@ -3,13 +3,22 @@ let ReactDOM = require('react-dom');
 let {Route, Router, IndexRoute, hashHistory} = require('react-router');
 let {Provider} = require('react-redux');
 
-let store = require('configureStore').configure();
+let configureStore = require('configureStore');
 
 let TodoApp = require('TodoApp');
 var actions = require('actions');
+let TodoAPI = require('TodoAPI');
 
-store.dispatch(actions.addTodo('Walk a dog'));
-store.dispatch(actions.addTodo('Walk a cat'));
+let initTodos = TodoAPI.getTodos();
+console.log(initTodos);
+let store = configureStore.configure({ todos: initTodos });
+
+store.subscribe(() => {
+  let state = store.getState();
+  console.log('setting', state.todos);
+  TodoAPI.setTodos(state.todos);
+});
+
 // Load foundation
 $(document).foundation();
 
