@@ -21,10 +21,28 @@ describe('Todo', () => {
     var todo = TestUtils.renderIntoDocument(<Todo {...todoData} dispatch={spy}/>);
     var $el = $(ReactDOM.findDOMNode(todo));
 
-    TestUtils.Simulate.click($el[0]);
+    TestUtils.Simulate.click($el.find('.todo')[0]);
 
     expect(spy).toHaveBeenCalledWith({
       type: 'TOGGLE_TODO',
+      id: todoData.id
+    });
+  });
+
+  it('should dispatch REMOVE_TODO action on click delete button', () => {
+    var todoData = {
+      id: 199,
+      text: 'Write todo.test.jsx test',
+      completed: true
+    };
+    var spy = expect.createSpy();
+    var todo = TestUtils.renderIntoDocument(<Todo {...todoData} dispatch={spy}/>);
+    var $el = $(ReactDOM.findDOMNode(todo));
+
+    TestUtils.Simulate.click($el.find('.del-todo-btn')[0]);
+
+    expect(spy).toHaveBeenCalledWith({
+      type: 'REMOVE_TODO',
       id: todoData.id
     });
   });

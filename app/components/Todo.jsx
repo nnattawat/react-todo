@@ -9,7 +9,7 @@ export let Todo = React.createClass({
     let {id, completed, dispatch} = this.props;
     if (completed) {
       return (
-        <div className="column small-4">
+        <div className="columns small-4">
           <button className="del-todo-btn button alert hollow" onClick={() => {
             dispatch(actions.removeTodo(id))
           }}>
@@ -37,7 +37,7 @@ export let Todo = React.createClass({
 
     return (
       <div className="row todo-container">
-        <div className={`column small-8 todo ${todoClassName}`} onClick={() => {
+        <div className={`columns small-8 todo ${todoClassName}`} onClick={() => {
           dispatch(actions.toggleTodo(id))
         }}>
           <div>
