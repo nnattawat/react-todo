@@ -4,7 +4,11 @@ let {connect} = require('react-redux');
 let actions = require('actions');
 
 
-export let Todo = React.createClass({
+export class Todo extends React.Component{
+  constructor(props) {
+    super(props);
+  }
+
   renderDeleteButton() {
     let {id, completed, dispatch} = this.props;
     if (completed) {
@@ -18,7 +22,7 @@ export let Todo = React.createClass({
         </div>
       )
     }
-  },
+  }
 
   render() {
     let {id, text, completed, createdAt, completedAt, dispatch} = this.props;
@@ -52,7 +56,7 @@ export let Todo = React.createClass({
       </div>
     )
   }
-});
+};
 
 // connect inject dispatch in props
 export default connect()(Todo);
