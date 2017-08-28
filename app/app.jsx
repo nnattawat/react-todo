@@ -15,7 +15,6 @@ let store = configureStore.configure({ todos: initTodos });
 
 store.subscribe(() => {
   let state = store.getState();
-  console.log('setting', state.todos);
   TodoAPI.setTodos(state.todos);
 });
 

@@ -5,9 +5,24 @@ let actions = require('actions');
 
 
 export let Todo = React.createClass({
-  render: function () {
+  renderDeleteButton() {
+    let {id, completed, dispatch} = this.props;
+    if (completed) {
+      return (
+        <div className="column small-4">
+          <button className="del-todo-btn button alert hollow" onClick={() => {
+            dispatch(actions.removeTodo(id))
+          }}>
+            Delete
+          </button>
+        </div>
+      )
+    }
+  },
+
+  render() {
     let {id, text, completed, createdAt, completedAt, dispatch} = this.props;
-    let todoClassName = completed ? 'todo todo-completed' : 'todo';
+    let todoClassName = completed ? 'todo-completed' : '';
     let renderDate = () => {
       let message = 'Created ';
       let timestamp = createdAt;
@@ -21,16 +36,19 @@ export let Todo = React.createClass({
     };
 
     return (
-      <div className={todoClassName} onClick={() => {
+      <div className="row todo-container">
+        <div className={`column small-8 todo ${todoClassName}`} onClick={() => {
           dispatch(actions.toggleTodo(id))
         }}>
-        <div>
-          <input type="checkbox" checked={completed}/>
+          <div>
+            <input type="checkbox" checked={completed}/>
+          </div>
+          <div>
+            <p>{text}</p>
+            <p className="todo__subtext">{renderDate()}</p>
+          </div>
         </div>
-        <div>
-          <p>{text}</p>
-          <p className="todo__subtext">{renderDate()}</p>
-        </div>
+        {this.renderDeleteButton()}
       </div>
     )
   }

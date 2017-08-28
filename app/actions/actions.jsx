@@ -12,6 +12,13 @@ export let addTodo = (text) => {
   }
 };
 
+export let removeTodo = (id) => {
+  return {
+    type: 'REMOVE_TODO',
+    id
+  }
+};
+
 export let toggleShowCompleted = () => {
   return {
     type: 'TOGGLE_SHOW_COMPLETED'

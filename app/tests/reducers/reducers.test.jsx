@@ -40,6 +40,29 @@ describe('Reducers', () => {
       expect(res[0].text).toEqual(action.text);
     });
 
+    it('should remove todo', () => {
+      let todos = [{
+        id: 1,
+        text: '...',
+        completed: false,
+        completedAt: undefined
+      }, {
+        id: 2,
+        text: '...',
+        completed: false,
+        completedAt: undefined
+      }];
+
+      let action = {
+        type: 'REMOVE_TODO',
+        id: 1
+      }
+
+      let res = reducers.todosReducer(df(todos), df(action));
+      expect(res.length).toEqual(1);
+      expect(res[0].id).toEqual(2);
+    });
+
     it('should toggle todo', () => {
       let todos = [{
         id: 1,

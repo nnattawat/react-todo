@@ -22,6 +22,16 @@ describe('Actions', () => {
     expect(res).toEqual(action);
   });
 
+  it('should generate add todo action', () => {
+    let action = {
+      type: 'REMOVE_TODO',
+      id: 1
+    }
+
+    let res = actions.removeTodo(action.id);
+    expect(res).toEqual(action);
+  });
+
   it('should generate toggle show completed action', () => {
     let action = {
       type: 'TOGGLE_SHOW_COMPLETED'
